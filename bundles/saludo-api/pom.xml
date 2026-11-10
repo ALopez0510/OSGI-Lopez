@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>edu.udla.osgi</groupId>
+    <artifactId>saludo-parent</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <artifactId>saludo-api</artifactId>
+  <packaging>bundle</packaging>
+  <name>Demo OSGi :: Contrato (API)</name>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <configuration>
+          <instructions>
+            <!-- Lo unico que se comparte entre proveedor y consumidor -->
+            <Export-Package>edu.udla.osgi.saludo.api;version="1.0.0"</Export-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

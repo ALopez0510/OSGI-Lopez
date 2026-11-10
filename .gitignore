@@ -1,0 +1,10 @@
+# Distribucion de Karaf: se descarga aparte (ver README)
+apache-karaf-*/
+descarga/
+
+# Salida de Maven (los JAR listos estan en dist/)
+target/
+
+# Archivos locales
+.claude/
+~$*

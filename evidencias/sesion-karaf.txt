@@ -1,0 +1,112 @@
+﻿karaf.bat: KARAF_LOG doesn't exist: "C:\Users\Alexander\Desktop\OSGI\apache-karaf-4.4.8\bin\..\data\log"
+karaf.bat: Creating "C:\Users\Alexander\Desktop\OSGI\apache-karaf-4.4.8\bin\..\data\log"
+        __ __                  ____      
+       / //_/____ __________ _/ __/      
+      / ,<  / __ `/ ___/ __ `/ /_        
+     / /| |/ /_/ / /  / /_/ / __/        
+    /_/ |_|\__,_/_/   \__,_/_/         
+
+  Apache Karaf (4.4.8)
+
+Hit '<tab>' for a list of available commands
+and '[cmd] --help' for help on a specific command.
+Hit '<ctrl-d>' or type 'system:shutdown' or 'logout' to shutdown Karaf.
+
+karaf@root()> version
+4.4.8
+karaf@root()> bundle:list
+START LEVEL 100 , List Threshold: 50
+ID │ State  │ Lvl │ Version │ Name
+───┼────────┼─────┼─────────┼──────────────────────────────────────────────────
+33 │ Active │  80 │ 4.4.8   │ Apache Karaf :: OSGi Services :: Event
+karaf@root()> bundle:install -s file:../dist/saludo-api-1.0.0.jar
+Bundle ID: 53
+karaf@root()> bundle:install -s file:../dist/saludo-proveedor-1.0.0.jar
+[PROVEEDOR] Iniciado: servicio ServicioSaludo publicado.
+Bundle ID: 54
+karaf@root()> bundle:install -s file:../dist/saludo-consumidor-1.0.0.jar
+[CONSUMIDOR] Evento: ServicioSaludo DISPONIBLE (idioma=es).
+[CONSUMIDOR] Iniciado.
+Bundle ID: 55
+[CONSUMIDOR] Hola, Karaf! (saludo #1)
+karaf@root()> [CONSUMIDOR] Hola, Karaf! (saludo #2)
+[PROVEEDOR] Sigo activo. Saludos atendidos: 2
+[CONSUMIDOR] Hola, Karaf! (saludo #3)
+bundle:list
+START LEVEL 100 , List Threshold: 50
+ID │ State  │ Lvl │ Version │ Name
+───┼────────┼─────┼─────────┼──────────────────────────────────────────────────
+33 │ Active │  80 │ 4.4.8   │ Apache Karaf :: OSGi Services :: Event
+53 │ Active │  80 │ 1.0.0   │ Demo OSGi :: Contrato (API)
+54 │ Active │  80 │ 1.0.0   │ Demo OSGi :: Proveedor
+55 │ Active │  80 │ 1.0.0   │ Demo OSGi :: Consumidor
+karaf@root()> [CONSUMIDOR] Hola, Karaf! (saludo #4)
+[PROVEEDOR] Sigo activo. Saludos atendidos: 4
+service:list edu.udla.osgi.saludo.api.ServicioSaludo
+[edu.udla.osgi.saludo.api.ServicioSaludo]
+-----------------------------------------
+ idioma = es
+ service.bundleid = 54
+ service.id = 92
+ service.scope = singleton
+Provided by : 
+ Demo OSGi :: Proveedor (54)
+Used by: 
+ Demo OSGi :: Consumidor (55)
+
+karaf@root()> bundle:stop edu.udla.osgi.saludo-proveedor
+[CONSUMIDOR] Evento: ServicioSaludo RETIRADO.
+[PROVEEDOR] Detenido: servicio retirado del registro.
+karaf@root()> [CONSUMIDOR] Servicio no disponible; sigo funcionando y reintento...
+[CONSUMIDOR] Servicio no disponible; sigo funcionando y reintento...
+[CONSUMIDOR] Servicio no disponible; sigo funcionando y reintento...
+bundle:list
+START LEVEL 100 , List Threshold: 50
+ID │ State    │ Lvl │ Version │ Name
+───┼──────────┼─────┼─────────┼────────────────────────────────────────────────
+33 │ Active   │  80 │ 4.4.8   │ Apache Karaf :: OSGi Services :: Event
+53 │ Active   │  80 │ 1.0.0   │ Demo OSGi :: Contrato (API)
+54 │ Resolved │  80 │ 1.0.0   │ Demo OSGi :: Proveedor
+55 │ Active   │  80 │ 1.0.0   │ Demo OSGi :: Consumidor
+karaf@root()> [CONSUMIDOR] Servicio no disponible; sigo funcionando y reintento...
+bundle:start edu.udla.osgi.saludo-proveedor
+[CONSUMIDOR] Evento: ServicioSaludo DISPONIBLE (idioma=es).
+[PROVEEDOR] Iniciado: servicio ServicioSaludo publicado.
+karaf@root()> [CONSUMIDOR] Hola, Karaf! (saludo #1)
+[CONSUMIDOR] Hola, Karaf! (saludo #2)
+[PROVEEDOR] Sigo activo. Saludos atendidos: 2
+bundle:stop edu.udla.osgi.saludo-consumidor
+[CONSUMIDOR] Evento: ServicioSaludo RETIRADO.
+[CONSUMIDOR] Detenido.
+karaf@root()> [PROVEEDOR] Sigo activo. Saludos atendidos: 2
+[PROVEEDOR] Sigo activo. Saludos atendidos: 2
+bundle:list
+START LEVEL 100 , List Threshold: 50
+ID │ State    │ Lvl │ Version │ Name
+───┼──────────┼─────┼─────────┼────────────────────────────────────────────────
+33 │ Active   │  80 │ 4.4.8   │ Apache Karaf :: OSGi Services :: Event
+53 │ Active   │  80 │ 1.0.0   │ Demo OSGi :: Contrato (API)
+54 │ Active   │  80 │ 1.0.0   │ Demo OSGi :: Proveedor
+55 │ Resolved │  80 │ 1.0.0   │ Demo OSGi :: Consumidor
+karaf@root()> bundle:start edu.udla.osgi.saludo-consumidor
+[CONSUMIDOR] Evento: ServicioSaludo DISPONIBLE (idioma=es).
+[CONSUMIDOR] Iniciado.
+[CONSUMIDOR] Hola, Karaf! (saludo #3)
+karaf@root()> [PROVEEDOR] Sigo activo. Saludos atendidos: 3
+[CONSUMIDOR] Hola, Karaf! (saludo #4)
+[CONSUMIDOR] Hola, Karaf! (saludo #5)
+bundle:list
+START LEVEL 100 , List Threshold: 50
+ID │ State  │ Lvl │ Version │ Name
+───┼────────┼─────┼─────────┼──────────────────────────────────────────────────
+33 │ Active │  80 │ 4.4.8   │ Apache Karaf :: OSGi Services :: Event
+53 │ Active │  80 │ 1.0.0   │ Demo OSGi :: Contrato (API)
+54 │ Active │  80 │ 1.0.0   │ Demo OSGi :: Proveedor
+55 │ Active │  80 │ 1.0.0   │ Demo OSGi :: Consumidor
+karaf@root()> [PROVEEDOR] Sigo activo. Saludos atendidos: 5
+shutdown -f
+karaf@root()> [CONSUMIDOR] Evento: ServicioSaludo RETIRADO.
+[CONSUMIDOR] Detenido.
+[PROVEEDOR] Detenido: servicio retirado del registro.
+
+
